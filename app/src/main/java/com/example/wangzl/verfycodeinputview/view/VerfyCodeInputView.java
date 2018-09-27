@@ -88,7 +88,6 @@ public class VerfyCodeInputView extends EditText {
     private int divideLineColor = Color.GRAY;
     private int focusedColor = Color.BLUE;
     private RectF rectF = new RectF();
-    private RectF focusedRecF = new RectF();
     private int psdType = 0;
     private final static int psdType_weChat = 0;
     private final static int psdType_bottomLine = 1;
@@ -101,10 +100,6 @@ public class VerfyCodeInputView extends EditText {
      * 竖直分割线的画笔
      */
     private Paint divideLinePaint;
-    /**
-     * 圆的画笔
-     */
-    private Paint circlePaint;
     /**
      * 底部线的画笔
      */
@@ -162,8 +157,6 @@ public class VerfyCodeInputView extends EditText {
      */
     private void initPaint() {
 
-        circlePaint = getPaint(50, Paint.Style.FILL, circleColor);
-
         bottomLinePaint = getPaint(2, Paint.Style.FILL, bottomLineColor);
 
         borderPaint = getPaint(3, Paint.Style.STROKE, borderColor);
@@ -186,7 +179,6 @@ public class VerfyCodeInputView extends EditText {
         paint.setStyle(style);
         paint.setColor(color);
         paint.setAntiAlias(true);
-
         return paint;
     }
 
@@ -221,7 +213,6 @@ public class VerfyCodeInputView extends EditText {
                 drawItemFocused(canvas, position);
                 break;
         }
-
         drawSelectText(canvas);
     }
 
@@ -231,9 +222,7 @@ public class VerfyCodeInputView extends EditText {
      * @param canvas
      */
     private void drawWeChatBorder(Canvas canvas) {
-
         canvas.drawRoundRect(rectF, rectAngle, rectAngle, borderPaint);
-
         for (int i = 0; i < maxCount - 1; i++) {
             canvas.drawLine((i + 1) * divideLineWStartX,
                     0,
@@ -241,7 +230,6 @@ public class VerfyCodeInputView extends EditText {
                     height,
                     divideLinePaint);
         }
-
     }
 
     private void drawItemFocused(Canvas canvas, int position) {
